@@ -75,7 +75,7 @@ public class AdminHomepage extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Integer deletedRows=myDB.deleteData(id.getText().toString());
+                Integer deletedRows=myDB.deleteData(DBHelper.CUSTOMER, id.getText().toString());
 
                 if (deletedRows>0){
                     Toast.makeText(AdminHomepage.this,"Data is Deleted",Toast.LENGTH_LONG).show();
@@ -120,7 +120,7 @@ public class AdminHomepage extends AppCompatActivity {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Cursor res= myDB.getAllData();
+                Cursor res= myDB.getAllData(DBHelper.RESERVATION_TABLE);
 
                 if (res.getCount()==0){
                     showMessages("Error","Nothing is found");

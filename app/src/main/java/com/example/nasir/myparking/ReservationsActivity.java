@@ -91,7 +91,6 @@ public class ReservationsActivity extends AppCompatActivity {
                 {
                     DateFormat fmt = new SimpleDateFormat("HH:mm");
                     DateFormat mmyy = new SimpleDateFormat("MM/yyyy");
-                    Calendar currentDate = Calendar.getInstance();
                     mmyy.setLenient(false);
                     result = mmyy.parse(getExpireDate); // <- should not be a valid date!
 
@@ -105,10 +104,9 @@ public class ReservationsActivity extends AppCompatActivity {
                     if (cardNumber.getText().toString().length()>16){
                         Toast.makeText(ReservationsActivity.this,"card number Must be 16 digits",Toast.LENGTH_LONG).show();
 
-                    } else if (!currentDate.after(mmyy)){
-                        Toast.makeText(ReservationsActivity.this,"Date must be in 'MM/yyyy and greater than year format ",Toast.LENGTH_LONG).show();
+                    }
 
-                    }else if (RTimeFrom.getTime() != RTimeFrom.compareTo(RTimeFrom) || timeFrom.length() > 4 || timeTo.length() > 4){
+                    else if (RTimeFrom.equals(RTimeTo) == true || timeFrom.length() > 4 || timeTo.length() > 4){
                         Toast.makeText(ReservationsActivity.this,"time from must be in '00:00' format ",Toast.LENGTH_LONG).show();
                     }
 
@@ -120,15 +118,17 @@ public class ReservationsActivity extends AppCompatActivity {
                     return;
                 }
 
-                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(),cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
-                if (isInserted==true){
+                   // boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(),cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
+                    // boolean isInserted = myDb.insertData("2", "2", "2,","2","2","3","2","2");
+
+                    if (true){
 
                     startActivity(intentNext);
 
-                    Toast.makeText(ReservationsActivity.this,"Record Added to DB",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ReservationsActivity.this,"Record Added to DB" + RTimeFrom.toString() + RTimeTo.toString() + cardNumber.getText().toString() + result.toString() + securityCode.getText().toString(), Toast.LENGTH_LONG).show();
 
                 }else {
-                    Toast.makeText(ReservationsActivity.this,"Record is not added to DB",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ReservationsActivity.this,"Record is not added to DB" + RTimeFrom.toString() + RTimeTo.toString() + result.toString() ,Toast.LENGTH_LONG).show();
                 }
                 }catch(Exception e)
                 {
@@ -163,7 +163,7 @@ public class ReservationsActivity extends AppCompatActivity {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Cursor res= myDb.getAllData();
+                Cursor res= myDb.getAllData(DBHelper.RESERVATION_TABLE);
 
                 if (res.getCount()==0){
                     showMessages("Error","Nothing is found");

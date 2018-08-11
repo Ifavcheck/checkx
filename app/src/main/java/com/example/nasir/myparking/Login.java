@@ -16,9 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static com.example.nasir.myparking.DBHelper.COLUMN_PASSWORD;
-import static com.example.nasir.myparking.DBHelper.COLUMN_USERNAME;
-import static com.example.nasir.myparking.DBHelper.REGISTRATION_TABLE;
+import static com.example.nasir.myparking.DBHelper.CUSTOMER_TABLE;
+
 
 public class Login extends AppCompatActivity {
 
@@ -53,11 +52,11 @@ public void btnclick (View view)
 
     final String user = edtUserName.getText().toString();
     final String pass = edtPassword.getText().toString();
-    final String currentuser = myDatabaseHelper.SearchExistingAccount(user);
+    final String currentuser = myDatabaseHelper.SearchExistingAccount(CUSTOMER_TABLE, user);
 
     if (pass.equals(currentuser))
     {
-        Toast.makeText(Login.this, "Login Successfuly", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, CustomerHomePage.class));
     }
     else{
 
