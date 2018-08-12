@@ -182,7 +182,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
                     return;
                 }
-                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(), cardTyps,cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
+                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(), cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
                     if (isInserted==true){
 
                         startActivity(intentNext);
